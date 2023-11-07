@@ -21,6 +21,7 @@ function addBreedOptions(breeds) {
 }
 
 function displayCatInfo(catData) {
+  console.log(catData)
   catInfo.innerHTML = `
     <div class='cat-conteiner'>
       <div class='cat-top-block'><img class='cat-img' src="${catData.url}" alt="${catData.breeds[0].name}" width='200'></div>
@@ -46,10 +47,8 @@ function toggleError(showError) {
     Notiflix.Notify.failure(
       'Oops! Something went wrong! Try reloading the page!'
     );
-    errorElement.style.display = 'block';
-  } else {
-    errorElement.style.display = 'none';
   }
+  return;
 }
 
 toggleLoader(true);
