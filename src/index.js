@@ -5,7 +5,6 @@ import Notiflix from 'notiflix';
 const breedSelect = document.querySelector('select.breed-select');
 const catInfo = document.querySelector('div.cat-info');
 const loader = document.querySelector('p.loader');
-const errorElement = document.querySelector('p.error');
 
 function addBreedOptions(breeds) {
   breedSelect.innerHTML = '';
