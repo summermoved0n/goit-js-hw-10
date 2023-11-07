@@ -1,27 +1,25 @@
 import { fetchBreeds, fetchCatByBreed } from './cat-api';
 import SlimSelect from 'slim-select';
-
-const mySelect = new SlimSelect({
-  select: '#selectElement',
-});
+import Notiflix from 'notiflix';
 
 const breedSelect = document.querySelector('select.breed-select');
 const catInfo = document.querySelector('div.cat-info');
 const loader = document.querySelector('p.loader');
 const errorElement = document.querySelector('p.error');
 
-// Функція для додавання опцій до селекту
 function addBreedOptions(breeds) {
-  breedSelect.innerHTML = ''; // Очистити селект перед додаванням нових опцій
+  breedSelect.innerHTML = '';
   breeds.forEach(breed => {
     const option = document.createElement('option');
     option.value = breed.id;
     option.textContent = breed.name;
     breedSelect.appendChild(option);
   });
+  new SlimSelect({
+    select: breedSelect,
+  });
 }
 
-// Функція для відображення інформації про кота
 function displayCatInfo(catData) {
   catInfo.innerHTML = `
     <div class='cat-conteiner'>
@@ -35,7 +33,6 @@ function displayCatInfo(catData) {
   `;
 }
 
-// Функція для показу/приховування завантажувача
 function toggleLoader(showLoader) {
   if (showLoader) {
     loader.style.display = 'block';
@@ -44,16 +41,17 @@ function toggleLoader(showLoader) {
   }
 }
 
-// Функція для показу/приховування помилки
 function toggleError(showError) {
   if (showError) {
+    Notiflix.Notify.failure(
+      'Oops! Something went wrong! Try reloading the page!'
+    );
     errorElement.style.display = 'block';
   } else {
     errorElement.style.display = 'none';
   }
 }
 
-// Отримати список порід при завантаженні сторінки
 toggleLoader(true);
 fetchBreeds()
   .then(breeds => {
@@ -66,7 +64,6 @@ fetchBreeds()
     console.error('Помилка отримання даних про породи:', error);
   });
 
-// Відобразити інформацію про кота при виборі породи
 breedSelect.addEventListener('change', () => {
   const selectedBreedId = breedSelect.value;
 
@@ -84,6 +81,6 @@ breedSelect.addEventListener('change', () => {
         console.error('Помилка отримання даних про кота:', error);
       });
   } else {
-    catInfo.innerHTML = ''; // Очистити інформацію про кота, якщо порода не вибрана
+    catInfo.innerHTML = '';
   }
 });

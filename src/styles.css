@@ -26,7 +26,7 @@ body{
 .cat-title{
   margin: 16px 0;
   font-size: 22px;
-  color: plum;
+  color: rgb(67, 192, 192);
 }
 
 .cat-text{
@@ -40,8 +40,10 @@ body{
 
 .pink-text{
   font-size: 16px;
-  color: plum;
+  color: rgb(40, 202, 140);
 }
+
+/** loader */
 
 .loader {
     width: 28px;
@@ -63,6 +65,8 @@ body{
         transform: rotate(360deg);
     }
     } 
+
+    /** js loader */
 
 .loader {
   display: none;
