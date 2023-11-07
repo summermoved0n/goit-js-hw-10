@@ -1,4 +1,9 @@
 import { fetchBreeds, fetchCatByBreed } from './cat-api';
+import SlimSelect from 'slim-select';
+
+const mySelect = new SlimSelect({
+  select: '#selectElement',
+});
 
 const breedSelect = document.querySelector('select.breed-select');
 const catInfo = document.querySelector('div.cat-info');
@@ -19,10 +24,14 @@ function addBreedOptions(breeds) {
 // Функція для відображення інформації про кота
 function displayCatInfo(catData) {
   catInfo.innerHTML = `
-    <img src="${catData.url}" alt="${catData.breeds[0].name}" width='200'>
-    <h3>${catData.breeds[0].name}</h3>
-    <p><span>Description:</span> ${catData.breeds[0].description}</p>
-    <p><span>Temperament:</span> ${catData.breeds[0].temperament}</p>
+    <div class='cat-conteiner'>
+      <div class='cat-top-block'><img class='cat-img' src="${catData.url}" alt="${catData.breeds[0].name}" width='200'></div>
+      <div>
+        <h3 class='cat-title'>${catData.breeds[0].name}</h3>
+        <p class='cat-text'><span class='pink-text'>Description:</span> ${catData.breeds[0].description}</p>
+        <p class='cat-temp'><span class='pink-text'>Temperament:</span> ${catData.breeds[0].temperament}</p>
+      </div>
+    </div>
   `;
 }
 
