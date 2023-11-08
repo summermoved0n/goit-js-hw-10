@@ -20,7 +20,7 @@ function addBreedOptions(breeds) {
 }
 
 function displayCatInfo(catData) {
-  console.log(catData)
+  console.log(catData);
   catInfo.innerHTML = `
     <div class='cat-conteiner'>
       <div class='cat-top-block'><img class='cat-img' src="${catData.url}" alt="${catData.breeds[0].name}" width='200'></div>
@@ -35,6 +35,7 @@ function displayCatInfo(catData) {
 
 function toggleLoader(showLoader) {
   if (showLoader) {
+    catInfo.innerHTML = '';
     loader.style.display = 'block';
   } else {
     loader.style.display = 'none';
@@ -57,6 +58,7 @@ fetchBreeds()
     toggleLoader(false);
   })
   .catch(error => {
+    breedSelect.classList.add('visually-hidden');
     toggleLoader(false);
     toggleError(true);
     console.error('Помилка отримання даних про породи:', error);
@@ -68,6 +70,7 @@ breedSelect.addEventListener('change', () => {
   if (selectedBreedId) {
     toggleLoader(true);
     toggleError(false);
+
     fetchCatByBreed(selectedBreedId)
       .then(catData => {
         displayCatInfo(catData);
