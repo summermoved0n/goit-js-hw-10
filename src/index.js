@@ -5,6 +5,7 @@ import Notiflix from 'notiflix';
 const breedSelect = document.querySelector('select.breed-select');
 const catInfo = document.querySelector('div.cat-info');
 const loader = document.querySelector('p.loader');
+const selectConteiner = document.querySelector('.select-conteiner');
 
 function addBreedOptions(breeds) {
   breedSelect.innerHTML = '';
@@ -54,11 +55,11 @@ function toggleError(showError) {
 toggleLoader(true);
 fetchBreeds()
   .then(breeds => {
+    selectConteiner.classList.remove('is-hidden')
     addBreedOptions(breeds);
     toggleLoader(false);
   })
   .catch(error => {
-    breedSelect.classList.add('visually-hidden');
     toggleLoader(false);
     toggleError(true);
     console.error('Помилка отримання даних про породи:', error);
